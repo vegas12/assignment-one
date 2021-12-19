@@ -1,9 +1,6 @@
-import json
-
 from flask import Flask, Blueprint, g, jsonify, url_for
 from flask_expects_json import expects_json
 
-from Movies.Entity.Movie import Movie
 from Movies.framework.database.connection import Connection
 from Movies.framework.repository.movieRepository import MovieRepository
 
@@ -23,9 +20,11 @@ def get_all():
 @movies.route('/<int:movie_id>', methods=['GET'])
 def get_by_id(movie_id: int):
   repository = MovieRepository(Connection('movies_database'))
-  result = repository.get_all()
+  movie = repository.get_by_id(movie_id)
 
-  return str(len(result))
+  resp = jsonify(movie.to_dict())
+
+  return resp, 200
 
 schema = {
   "type": "object",

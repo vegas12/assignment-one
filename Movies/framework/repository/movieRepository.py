@@ -9,7 +9,9 @@ class MovieRepository:
         self.connection = connection
 
     def get_by_id(self, movie_id: int):
-        self.connection.query("SELECT * FROM movies where movie_id = ?", [movie_id])
+        result = self.connection.query("SELECT * FROM movies where movie_id = ?", [movie_id]).fetchone()
+
+        return Movie(result[0], result[1])
 
     def get_all(self) -> List[Movie]:
         results = self.connection.query("SELECT * FROM movies", []).fetchall()
