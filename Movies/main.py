@@ -11,7 +11,7 @@ def get_all():
   repository = MovieRepository(Connection('movies_database'))
   movies_list = repository.get_all()
 
-  resp = jsonify([m.to_dict() for m in movies_list])
+  resp = jsonify([movie.to_dict() for movie in movies_list])
 
   return resp, 200
 
