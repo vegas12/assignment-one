@@ -4,8 +4,6 @@ from flask_expects_json import expects_json
 from Movies.framework.database.connection import Connection
 from Movies.framework.repository.movieRepository import MovieRepository
 
-app = Flask(__name__)
-
 movies = Blueprint("movies", __name__)
 
 @movies.route('/', methods=['GET'])
